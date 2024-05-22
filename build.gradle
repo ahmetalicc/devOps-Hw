@@ -1,0 +1,63 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.4'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'org.sau'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.json:json:20230227'
+	implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.529')
+	implementation 'com.amazonaws:aws-java-sdk-s3'
+	implementation platform('software.amazon.awssdk:bom:2.17.32')
+	implementation 'software.amazon.awssdk:regions'
+	implementation 'software.amazon.awssdk:auth'
+	implementation 'software.amazon.awssdk:textract'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+jar {
+	duplicatesStrategy = 'INCLUDE' // Set the strategy to handle duplicates
+
+	manifest {
+		attributes 'Main-Class': 'org.sau.devopsproject2.DevOpsProject2Application' // Adjust the main class path
+	}
+	from {
+		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+}
+
+
+tasks.register('runJar', JavaExec) {
+	dependsOn 'jar'
+	main = 'org/sau/devopsproject2/DevOpsProject2Application.java'
+	// Replace 'com.example.MainClass' with your actual main class
+	classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

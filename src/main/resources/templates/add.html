@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add person</title>
+</head>
+<body>
+
+<h3> Add Person</h3>
+
+<hr>
+
+<fieldset>
+
+    <form action="/person/save" method="post" enctype="multipart/form-data" th:object="${person}">
+        <input type="hidden" id="id" name="id" th:value="*{id}">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:field="*{name}"><br>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" th:field="*{address}"><br>
+        <label for="photo">Image:</label>
+        <input type="file" id="photo" accept="image/png, image/jpeg" name="photo"><br>
+        <input type="submit" value="Save">
+    </form>
+
+</fieldset>
+
+</body>
+</html>

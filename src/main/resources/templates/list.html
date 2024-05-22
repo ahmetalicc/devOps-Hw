@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+
+    <style>
+
+        td,th,tr{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<h3>Person List</h3>
+<hr>
+<a th:href="@{/person/showFormForAdd}">add</a>
+<table>
+
+    <thead>
+    <tr>
+        <th>NAME</th>
+        <th>ADDRESS</th>
+        <th>PHOTO</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="p:${persons}">
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.address}"></td>
+        <td>
+            <!-- Assuming img_url contains the filename -->
+            <img th:src="${p.img_url}" alt="Resim" style="max-width: 100px; display: block;">        </td>
+
+        <td>
+            <a th:href="@{/person/showFormForUpdate(personId=${p.id})}">update</a>
+            <a th:href="@{/person/delete(personId=${p.id})}">delete</a>
+
+        </td>
+    </tr>
+
+    <tbody/>
+
+</table>
+</body>
+</html>
