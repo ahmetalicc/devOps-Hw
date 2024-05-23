@@ -28,7 +28,7 @@ spec:
         - name: devops
           image: ahmetalicc/devops:latest
           ports:
-            - containerPort: 8090
+            - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres:5432/Swe304"
