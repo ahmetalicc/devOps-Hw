@@ -17,9 +17,9 @@ import software.amazon.awssdk.services.textract.TextractClient;
 @Getter
 public class AWSClientConfig {
 
-    private String accessKey = "AKIA47CR2YTX6ZVTZZ7I";
+    private String accessKey = "";
 
-    private String secretAccessKey = "KGqOhglagdmZ//lE/NdNpmkrKcyfp0y9ByoKMFTF";
+    private String secretAccessKey = "";
 
     @Value("${aws.s3.bucket}")
     private String bucketName;
